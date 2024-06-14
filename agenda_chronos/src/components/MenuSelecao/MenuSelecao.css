@@ -5,11 +5,14 @@
     width: 12%;
     background-color:hsl(183, 100%, 92%); /* Apenas para visualização, pode remover */
     height: 92.5vh;
- 
+    text-align: center;
 }
+ 
+
 
 
 .MenuSelecao button{
     background-color: #3c4e7a;
+    padding: 20px 45px;
     color: white;
 }

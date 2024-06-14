@@ -5,7 +5,28 @@ const ListContext = createContext(undefined);
 export default function ListProvider({ children }) {
 
   const [search, setSearch] = useState("");
+  const [showPendentes, setShowPendentes] = useState(false);
+  const [showConcluidas, setShowConcluidas] = useState(false);
   
+  const handleShowPendentes = () => {
+    setShowPendentes(true);
+    setShowConcluidas(false);
+
+    console.log(showPendentes,showConcluidas); 
+  };
+
+  const handleShowConcluidas = () => {
+    setShowPendentes(false);
+    setShowConcluidas(true);
+    console.log(showPendentes,showConcluidas);
+  };
+
+  const handleShowTodas = () => {
+    setShowPendentes(false);
+    setShowConcluidas(false);
+    console.log(showPendentes,showConcluidas);
+  };
+
 
   const[tasks, setTasks] = useState([
     {
@@ -49,8 +70,16 @@ export default function ListProvider({ children }) {
     setTasks(filteredTasks);
   };
 
+  const changeStatus = (id, e) => {
+    setTasks(prevTasks => 
+        prevTasks.map(task =>
+          task.id === id ? { ...task, status: e } : task
+        )
+      );
+  };
+
   return (
-    <ListContext.Provider value={{ tasks, addTask, removeTask, search, setSearch}}>
+    <ListContext.Provider value={{ tasks, addTask, removeTask, search, setSearch, changeStatus, handleShowPendentes, handleShowConcluidas , handleShowTodas, showPendentes,showConcluidas}}>
       { children }
     </ListContext.Provider>
   );
