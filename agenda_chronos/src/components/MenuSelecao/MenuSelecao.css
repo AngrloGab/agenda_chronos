@@ -7,3 +7,9 @@
     height: 92.5vh;
  
 }
+
+
+.MenuSelecao button{
+    background-color: #3c4e7a;
+    color: white;
+}

@@ -56,11 +56,23 @@
     
 }
 
-.Display button{
-    border: none;
+.task-list tr td button{
+    padding: 8px;
+    margin: 0;
+    text-align: center;
+    vertical-align: center;
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 6px;
     color: white;
-    background-color: none;
+}
 
 
-   
+.task-list tr .botao-apagar{
+    align-items: center;
+    vertical-align: center;
+    text-align: center;
+}
+
+.create-task{
+    color: white;
 }

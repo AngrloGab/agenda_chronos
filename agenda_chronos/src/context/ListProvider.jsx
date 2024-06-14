@@ -3,19 +3,23 @@ import { useState, createContext, useContext } from 'react'
 const ListContext = createContext(undefined);
 
 export default function ListProvider({ children }) {
+
+  const [search, setSearch] = useState("");
+  
+
   const[tasks, setTasks] = useState([
     {
       id: 1,
       text: "Fazer agenda chronos",
       status: "Em andamento",
-      prioridade: "alta",
+      prioridade: "Alta",
       prazo_de_entrega: "2 de Jun, 2024"
     },
     {
       id: 2,
       text: "Criar sprites do jogo",
       status: "Suspenso",
-      prioridade: "baixa",
+      prioridade: "Baixa",
       prazo_de_entrega: "10 de Dez, 2024"
     },
     {
@@ -39,8 +43,14 @@ export default function ListProvider({ children }) {
     setTasks(newTasks);
   };
 
+  const removeTask = (id) => {
+    const newTasks = [...tasks]
+    const filteredTasks = newTasks.filter(task => task.id !== id ? task : null);
+    setTasks(filteredTasks);
+  };
+
   return (
-    <ListContext.Provider value={{ tasks, addTask}}>
+    <ListContext.Provider value={{ tasks, addTask, removeTask, search, setSearch}}>
       { children }
     </ListContext.Provider>
   );

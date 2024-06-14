@@ -11,8 +11,8 @@ function ModalTask({setOpenModal}) {
 
   const [selectedDate, setDate] = useState(null);
   const [titulo, setTitulo] = useState("");
-  const [status, setStatus] = useState("");
   const [prioridade, setPrioridade] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
