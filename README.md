@@ -1,2 +1,2 @@
-# agenda_crhonos
-Agenda digital 
+# Agenda Chronos
+Agenda digital / Task Manager
