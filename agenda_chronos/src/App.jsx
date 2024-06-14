@@ -4,21 +4,29 @@ import "./App.css"
 import BarraNavegacao from './components/BarraNavegacao/BarraNavegacao'
 import Display from './components/Display/Display'
 import MenuSelecao from './components/MenuSelecao/MenuSelecao'
+import ModalTask from './components/ModalTask/ModalTask'
+
+import ListProvider from './context/ListProvider'
 
 
 function App() {
 
+  const [openModal, setOpenModal] = useState(false);
+
+  
 
   return (
     <div className="app">
-      <BarraNavegacao></BarraNavegacao>
-      <div className="content">
-        <MenuSelecao/>
-        <Display/>
-      </div>
-      
+      <ListProvider>
+        {openModal && <ModalTask setOpenModal={setOpenModal} />}
+        <BarraNavegacao></BarraNavegacao>
+        <div className="content">
+          <MenuSelecao/>
+          <Display setOpenModal={setOpenModal} />
+        </div>
+      </ListProvider>
     </div>
-   
+
   )
 }
 

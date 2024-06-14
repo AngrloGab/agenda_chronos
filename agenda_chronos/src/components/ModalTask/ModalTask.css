@@ -1,0 +1,18 @@
+.modal-background {
+    width: 100vw; /* Certifique-se de que a largura seja 100% da largura da tela */
+    height: 100vh; /* Certifique-se de que a altura seja 100% da altura da tela */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+    position: fixed; /* Fixa o modal na tela */
+    top: 0; /* Alinha o modal ao topo */
+    left: 0; /* Alinha o modal à esquerda */
+    display: flex; /* Usar flexbox para centralização */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.task-form {
+    background-color: white; /* Fundo branco para o conteúdo do modal */
+    padding: 4px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para o modal */
+}

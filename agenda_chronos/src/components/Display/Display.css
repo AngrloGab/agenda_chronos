@@ -4,5 +4,63 @@
     width: 88%;
     background-color:#d4fdff; /* Apenas para visualização, pode remover */
     height: 92.5vh;
+    font-family: 'Roboto', sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
+.task-list{
+    color: #d4fdff; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50%;
+    background-color: #6a79a9;
+    padding: 2px 0;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px 3px #3c4e7a;
+}
+
+.task-list table{
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+}
+
+.task-list table tr th{
+    height: 56px;
+    font-weight: 16px;
+    letter-spacing: .25px;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.task-list table tr.item td{
+    border-bottom: 1px solid white; 
+    padding: 0 10px;
+}
+
+.task-list table tr.item{
+    height: 60px;
+}
+
+.task-list table tr td{
+    vertical-align: middle;
+    width: 20%;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    
+}
+
+.Display button{
+    border: none;
+    color: white;
+    background-color: none;
+
+
+   
+}
