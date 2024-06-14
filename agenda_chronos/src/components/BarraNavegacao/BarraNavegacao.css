@@ -1,0 +1,15 @@
+.BarraNavegacao{
+    display: flex;
+    padding: 10px;
+}
+
+.iconeAmpulheta{
+    width: 2%;
+}
+
+#pesquisa{
+    border-radius: 10px;
+    border: none;
+    margin-left: auto;
+    margin-top: 4px;
+}

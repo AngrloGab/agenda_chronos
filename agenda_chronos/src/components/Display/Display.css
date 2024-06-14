@@ -1,0 +1,8 @@
+.Display{
+    border-radius: 10px;
+    padding: 10px; /* Espaçamento interno opcional */
+    width: 88%;
+    background-color:#d4fdff; /* Apenas para visualização, pode remover */
+    height: 92.5vh;
+}
+
