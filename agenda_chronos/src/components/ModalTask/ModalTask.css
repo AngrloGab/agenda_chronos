@@ -11,8 +11,35 @@
 }
 
 .task-form {
-    background-color: white; /* Fundo branco para o conteúdo do modal */
+    background-color: #6a79a9;
+    padding: 2px 0;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px 3px #3c4e7a;
+    color: white;
     padding: 4px; /* Espaçamento interno */
     border-radius: 10px; /* Bordas arredondadas */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para o modal */
+}
+
+.cancelButton{
+    background-color: rgba(255, 0, 0, 0.78);
+    margin-left: 10px;
+    color: white;
+}
+
+.arredondado{
+    border-radius: 3px;
+    border: none;
+}
+
+.button-create-task{
+    color: white;
+}
+
+.formulario{
+    margin: 40px 10px;
+}
+
+.tabela{
+    margin-bottom: 40px;
 }

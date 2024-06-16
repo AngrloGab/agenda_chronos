@@ -36,9 +36,9 @@ function ModalTask({setOpenModal}) {
             <div className="task-form">
                 
                 <h2 className='task-modal-title' >Criar tarefa:</h2>
-                <form onSubmit={handleSubmit} >
+                <form onSubmit={handleSubmit} className='formulario'>
 
-                    <table>
+                    <table className='tabela'>
 
                         <tr>
                             <th>Título</th>
@@ -48,9 +48,9 @@ function ModalTask({setOpenModal}) {
                         </tr>
 
                         <tr>
-                            <td> <input value={titulo} type="text" placeholder='Digite o título' onChange={(e) => setTitulo(e.target.value)} /> </td>
+                            <td> <input className='arredondado' value={titulo} type="text" placeholder='Digite o título' onChange={(e) => setTitulo(e.target.value)} /> </td>
                             <td>
-                                <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                                <select className='arredondado' value={status} onChange={(e) => setStatus(e.target.value)}>
                                     <option value="">Selecione um status</option>
                                     <option value="Parado">Parado</option>
                                     <option value="Em andamento">Em andamento</option>
@@ -60,7 +60,7 @@ function ModalTask({setOpenModal}) {
                             </td>
 
                             <td>
-                                <select value={prioridade} onChange={(e) => setPrioridade(e.target.value)} >
+                                <select className='arredondado' value={prioridade} onChange={(e) => setPrioridade(e.target.value)} >
                                     <option value="">Selecione a prioridade</option>
                                     <option value="Alta">Alta</option>
                                     <option value="Média">Média</option>
@@ -69,7 +69,7 @@ function ModalTask({setOpenModal}) {
                             </td>
 
                             <td>
-                                <Datepicker value={selectedDate} selected={selectedDate} onChange={date=>setDate(date)} dateFormat="dd 'de' MM, yyyy"/>
+                                <Datepicker className='arredondado' value={selectedDate} selected={selectedDate} onChange={date=>setDate(date)} dateFormat="dd 'de' MM, yyyy"/>
                             </td>
                            
 
@@ -78,8 +78,8 @@ function ModalTask({setOpenModal}) {
 
                        
                     </table>
-                    <button type="submit"> Criar tarefa</button>
-                    <button type="cancel" onClick={()=> setOpenModal(false)}> Cancelar</button>
+                    <button type="submit" className='button-create-task'> Criar tarefa</button>
+                    <button type="cancel" onClick={()=> setOpenModal(false)} className='cancelButton'> Cancelar</button>
                     
                 </form>
                 
