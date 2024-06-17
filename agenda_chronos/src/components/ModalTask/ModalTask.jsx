@@ -4,8 +4,11 @@ import Datepicker from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import { format } from 'date-fns';
 import axios from 'axios'
+import PropTypes from 'prop-types';
 
 function ModalTask({setOpenModal}) {
+
+  
 
 
   const [values, setValues] = useState({
@@ -114,5 +117,9 @@ function ModalTask({setOpenModal}) {
     </div>
   )
 }
+
+ModalTask.propTypes = {
+    setOpenModal: PropTypes.func.isRequired,
+  };
 
 export default ModalTask

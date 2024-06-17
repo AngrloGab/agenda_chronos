@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './Display.css';
 import { useList } from '../../context/ListProvider';
 import axios from 'axios'
+import PropTypes from 'prop-types';
 
 const Display = ({ setOpenModal }) => {
   const { search, showPendentes, showConcluidas} = useList();
@@ -131,6 +132,10 @@ const Display = ({ setOpenModal }) => {
       </div>
     </div>
   );
+};
+
+Display.propTypes = {
+  setOpenModal: PropTypes.func.isRequired,
 };
 
 export default Display;
