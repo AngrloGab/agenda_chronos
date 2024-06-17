@@ -4,6 +4,7 @@ const ListContext = createContext(undefined);
 
 export default function ListProvider({ children }) {
 
+
   const [search, setSearch] = useState("");
   const [showPendentes, setShowPendentes] = useState(false);
   const [showConcluidas, setShowConcluidas] = useState(false);
@@ -27,7 +28,7 @@ export default function ListProvider({ children }) {
     console.log(showPendentes,showConcluidas);
   };
 
-
+  
   const[tasks, setTasks] = useState([
     {
       id: 1,

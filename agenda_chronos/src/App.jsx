@@ -1,32 +1,16 @@
-import { useState } from 'react'
-import "./App.css"
-
-import BarraNavegacao from './components/BarraNavegacao/BarraNavegacao'
-import Display from './components/Display/Display'
-import MenuSelecao from './components/MenuSelecao/MenuSelecao'
-import ModalTask from './components/ModalTask/ModalTask'
-
-import ListProvider from './context/ListProvider'
+import { React } from 'react'
+import Home from './Home'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
 function App() {
 
-  const [openModal, setOpenModal] = useState(false);
- 
-
-  
-
   return (
-    <div className="app">
-      <ListProvider>
-        {openModal && <ModalTask setOpenModal={setOpenModal} />}
-        <BarraNavegacao></BarraNavegacao>
-        <div className="content">
-          <MenuSelecao/>
-          <Display setOpenModal={setOpenModal} />
-        </div>
-      </ListProvider>
-    </div>
+    <BrowserRouter>
+      <Routes>
+          <Route path='/' element={<Home />} />
+      </Routes>
+    </BrowserRouter>
 
   )
 }

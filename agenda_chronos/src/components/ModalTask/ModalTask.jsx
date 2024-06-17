@@ -3,31 +3,52 @@ import "./ModalTask.css"
 import Datepicker from "react-datepicker"
 import 'react-datepicker/dist/react-datepicker.css'
 import { format } from 'date-fns';
-import { useList } from '../../context/ListProvider';
+import axios from 'axios'
 
 function ModalTask({setOpenModal}) {
 
-  const { addTask } = useList();
 
-  const [selectedDate, setDate] = useState(null);
-  const [titulo, setTitulo] = useState("");
-  const [prioridade, setPrioridade] = useState("");
-  const [status, setStatus] = useState("");
+  const [values, setValues] = useState({
+    titulo: '',
+    status: '',
+    prioridade: '',
+    data: ''
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!selectedDate || !titulo || !status || !prioridade) return;
-    const formattedDate = selectedDate ? format(selectedDate, "dd 'de' MMMM, yyyy") : null;
-    console.log(titulo,status,prioridade,formattedDate);
-    //adicionar task
-    addTask(titulo,status,prioridade,formattedDate); 
-    //limpar os campos
-    setDate(null);
-    setTitulo("");
-    setStatus("");
-    setPrioridade("");
-    setOpenModal(false);
-  }
+    const { titulo, status, prioridade, data } = values;
+    if(!data || !titulo || !status || !prioridade) return;
+    const formattedDate = data ? format(new Date(data), "dd 'de' MMMM, yyyy") : null;
+
+    // Atualizar o estado de values com a data formatada
+    setValues(prevValues => ({
+        ...prevValues,
+        data: formattedDate
+    }));
+
+    // Adicionar task usando axios
+    axios.post('http://localhost:8081/task', {
+        titulo: values.titulo,
+        status: values.status,
+        prioridade: values.prioridade,
+        data: formattedDate
+    })
+    .then(res => {
+        console.log(res);
+        // Limpar os campos após o sucesso
+        setValues({
+            titulo: '',
+            status: '',
+            prioridade: '',
+            data: ''
+        });
+        setOpenModal(false);
+        // Recarregar a página após fechar o modal
+        window.location.reload();
+    })
+    .catch(err => console.log(err));
+}
   
   return (
     <div className='modal-background'>
@@ -40,41 +61,46 @@ function ModalTask({setOpenModal}) {
 
                     <table className='tabela'>
 
-                        <tr>
-                            <th>Título</th>
-                            <th>Status</th>
-                            <th>Prioridade</th>
-                            <th>Prazo</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Status</th>
+                                <th>Prioridade</th>
+                                <th>Prazo</th>
+                            </tr>
+                        </thead>
 
-                        <tr>
-                            <td> <input className='arredondado' value={titulo} type="text" placeholder='Digite o título' onChange={(e) => setTitulo(e.target.value)} /> </td>
-                            <td>
-                                <select className='arredondado' value={status} onChange={(e) => setStatus(e.target.value)}>
-                                    <option value="">Selecione um status</option>
-                                    <option value="Parado">Parado</option>
-                                    <option value="Em andamento">Em andamento</option>
-                                    <option value="Suspenso">Suspenso</option>
-                                    <option value="Feito">Feito</option>
-                                </select>
-                            </td>
+                        <thead>
 
-                            <td>
-                                <select className='arredondado' value={prioridade} onChange={(e) => setPrioridade(e.target.value)} >
-                                    <option value="">Selecione a prioridade</option>
-                                    <option value="Alta">Alta</option>
-                                    <option value="Média">Média</option>
-                                    <option value="Baixa">Baixa</option>
-                                </select>
-                            </td>
+                            <tr>
+                                <td> <input className='arredondado'  type="text" placeholder='Digite o título' onChange={(e) => setValues({...values, titulo: e.target.value})} /> </td>
+                                <td>
+                                    <select className='arredondado'  onChange={(e) => setValues({...values, status: e.target.value})}>
+                                        <option value="">Selecione um status</option>
+                                        <option value="Parado">Parado</option>
+                                        <option value="Em andamento">Em andamento</option>
+                                        <option value="Suspenso">Suspenso</option>
+                                        <option value="Feito">Feito</option>
+                                    </select>
+                                </td>
 
-                            <td>
-                                <Datepicker className='arredondado' value={selectedDate} selected={selectedDate} onChange={date=>setDate(date)} dateFormat="dd 'de' MM, yyyy"/>
-                            </td>
-                           
+                                <td>
+                                    <select className='arredondado'  onChange={(e) => setValues({...values, prioridade: e.target.value})} >
+                                        <option value="">Selecione a prioridade</option>
+                                        <option value="Alta">Alta</option>
+                                        <option value="Média">Média</option>
+                                        <option value="Baixa">Baixa</option>
+                                    </select>
+                                </td>
 
-                           
-                        </tr>
+                                <td>
+                                    <Datepicker className='arredondado'  selected={values.data}  onChange={data => setValues({ ...values, data: data })} dateFormat="dd 'de' MM, yyyy"/>
+                                </td>
+                            
+
+                            
+                            </tr>
+                        </thead>
 
                        
                     </table>

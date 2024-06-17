@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: Heveltica;
+    background-color:#6a9aea;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    flex: 1; /* Ocupar o espaço restante */
+  }
+  
+.content > * {
+    height: 100%; /* Ocupa toda a altura disponível */
+    margin: 10px 5px;
+}
+
+/* Remover a margem da esquerda do primeiro e da direita do último elemento */
+.content > *:first-child {
+margin-left: 0;
+}
+  
+.content > *:last-child {
+margin-right: 0;
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: black;
+    padding: 5px 60px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.3s;
+    margin: 6px 0px;
+  }
+  
+  button:hover {
+    opacity: 1;
+  }

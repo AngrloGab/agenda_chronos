@@ -1,10 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Display.css';
 import { useList } from '../../context/ListProvider';
+import axios from 'axios'
 
 const Display = ({ setOpenModal }) => {
-  const { tasks, removeTask, search, changeStatus , showPendentes, showConcluidas} = useList();
+  const { search, showPendentes, showConcluidas} = useList();
+  const [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = () => {
+    axios.get('http://localhost:8081/')
+      .then(res => setTasks(extractTasks(res.data)))
+      .catch(err => console.log(err));
+  };
+
+  const extractTasks = (list) => {
+    return list.map(item => ({
+      id: item.id,
+      text: item.titulo,
+      status: item.status,
+      prioridade: item.prioridade,
+      prazo_de_entrega: item.data
+    }));
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/')
+    .then(res => setTasks(extractTasks(res.data)))
+    .catch(err => console.log(err));
+  }, []);
+  
 
   const getColorClass = (prioridade) => {
     switch (prioridade) {
@@ -18,6 +46,36 @@ const Display = ({ setOpenModal }) => {
         return '';
     }
   };
+
+  const handleStatusChange = (taskId, newStatus) => {
+    // Atualizar o status no frontend imediatamente
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+
+    // Enviar a solicitação para atualizar o status no backend
+    axios.put(`http://localhost:8081/task/${taskId}`, { status: newStatus })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
+  const removeTask = (taskId) => {
+    // Remover a tarefa do estado local
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
+
+    // Enviar uma solicitação DELETE para remover a tarefa do servidor
+    axios.delete(`http://localhost:8081/task/${taskId}`)
+      .then(res => {
+        console.log(res.data);
+        // Atualizar a lista de tarefas após a remoção
+        fetchTasks();
+      })
+      .catch(err => console.log(err));
+  };
+
 
   const filteredTasks = () => {
     if (showPendentes) {
@@ -48,7 +106,7 @@ const Display = ({ setOpenModal }) => {
               <tr className="item" key={task.id}>
                 <td>{task.text}</td>
                 <td className='status-display'>
-                  <select value={task.status} onChange={(e) => changeStatus(task.id, e.target.value)}>
+                  <select value={task.status} onChange={(e) => handleStatusChange(task.id, e.target.value)}>
                     <option value="">Selecione um status</option>
                     <option value="Parado">Parado</option>
                     <option value="Em andamento">Em andamento</option>
